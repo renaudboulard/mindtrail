@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SessionPlayer from '../components/SessionPlayer';
+import TrainingProgramme from '../components/TrainingProgramme';
+---
+
+<BaseLayout title="MindTrail — Your Sessions" description="Access your MindTrail visualization sessions.">
+  <div class="min-h-screen bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-100">
+      <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="/" class="text-gray-900 font-bold text-xl flex items-center gap-2">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8 3l4 8 5-5 2 8H2L8 3z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          MindTrail
+        </a>
+        <button id="logout-btn" class="text-sm text-gray-400 hover:text-gray-600 transition">Sign out</button>
+      </div>
+    </header>
+
+    <!-- Verification gate -->
+    <div id="verify-section" class="max-w-md mx-auto px-6 py-20 text-center">
+      <h1 class="text-2xl font-bold text-gray-900 mb-3">Access Your Sessions</h1>
+      <p class="text-gray-500 mb-8">Enter the email you used to purchase MindTrail.</p>
+
+      <form id="verify-form" class="space-y-4">
+        <input
+          type="email"
+          id="email-input"
+          placeholder="your@email.com"
+          required
+          class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-center"
+        />
+        <button
+          type="submit"
+          class="w-full bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl font-semibold transition"
+        >
+          Access My Sessions
+        </button>
+        <p id="verify-error" class="text-red-500 text-sm hidden"></p>
+      </form>
+
+      <p class="text-gray-400 text-sm mt-8">
+        Don't have access yet? <a href="/#pricing" class="text-emerald-500 hover:text-emerald-600 font-medium">Get all 7 sessions</a>
+      </p>
+    </div>
+
+    <!-- Content (hidden until verified) -->
+    <div id="content-section" class="hidden">
+      <div class="max-w-5xl mx-auto px-6 py-12">
+        <div class="mb-4">
+          <p class="text-sm text-gray-400">Logged in as <span id="user-email" class="text-gray-600 font-medium"></span></p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12">
+          <!-- Left: Audio Player -->
+          <div>
+            <SessionPlayer client:load />
+          </div>
+
+          <!-- Right: Training Programme -->
+          <div>
+            <TrainingProgramme client:load />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const verifySection = document.getElementById('verify-section')!;
+    const contentSection = document.getElementById('content-section')!;
+    const verifyForm = document.getElementById('verify-form') as HTMLFormElement;
+    const emailInput = document.getElementById('email-input') as HTMLInputElement;
+    const verifyError = document.getElementById('verify-error')!;
+    const userEmailSpan = document.getElementById('user-email')!;
+    const logoutBtn = document.getElementById('logout-btn')!;
+
+    // Check for saved email
+    const savedEmail = localStorage.getItem('mindtrail_email');
+    if (savedEmail) {
+      showContent(savedEmail);
+    }
+
+    verifyForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      verifyError.classList.add('hidden');
+      const email = emailInput.value.trim();
+
+      try {
+        const res = await fetch('/api/verify-purchase', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await res.json();
+
+        if (data.verified) {
+          localStorage.setItem('mindtrail_email', email);
+          showContent(email);
+        } else {
+          verifyError.textContent = data.error || 'No purchase found for this email. Please check the email you used at checkout.';
+          verifyError.classList.remove('hidden');
+        }
+      } catch {
+        verifyError.textContent = 'Something went wrong. Please try again.';
+        verifyError.classList.remove('hidden');
+      }
+    });
+
+    logoutBtn.addEventListener('click', () => {
+      localStorage.removeItem('mindtrail_email');
+      verifySection.classList.remove('hidden');
+      contentSection.classList.add('hidden');
+    });
+
+    function showContent(email: string) {
+      verifySection.classList.add('hidden');
+      contentSection.classList.remove('hidden');
+      userEmailSpan.textContent = email;
+
+      // Pass email to SessionPlayer by updating the prop via a custom event
+      window.dispatchEvent(new CustomEvent('mindtrail:auth', { detail: { email } }));
+    }
+  </script>
+</BaseLayout>

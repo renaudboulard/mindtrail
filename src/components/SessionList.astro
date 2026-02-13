@@ -1,0 +1,114 @@
+---
+const sessions = [
+  {
+    number: 1,
+    title: "Foundational Relaxation & Trail Senses",
+    duration: "10 min",
+    description: "Build your visualization ability from zero. Create your trail safe space with progressive sensory layering across all five senses.",
+    hasPreview: true,
+  },
+  {
+    number: 2,
+    title: "Technical Descent Mastery",
+    duration: "12 min",
+    description: "Develop proprioceptive imagery for downhill running. Move from slow-motion foot placement to flowing, instinctive descent confidence.",
+  },
+  {
+    number: 3,
+    title: "Climb Resilience & Mental Toughness",
+    duration: "12 min",
+    description: "Synchronize breathing with effort, install self-talk patterns, and build the mental framework to welcome every climb.",
+  },
+  {
+    number: 4,
+    title: "Night Running Confidence",
+    duration: "10 min",
+    description: "Transform darkness from fear to comfort. Build auditory navigation skills and the mental anchors for 2 AM ultra sections.",
+  },
+  {
+    number: 5,
+    title: "Aid Station Transitions & Fueling",
+    duration: "12 min",
+    description: "Visualize efficient stops and build fueling discipline. Practice the crisis decision tree when your body says stop.",
+  },
+  {
+    number: 6,
+    title: "DNF Prevention & Race Resilience",
+    duration: "15 min",
+    description: "Build emotional resilience for your lowest points. Develop your personal 'why' anchor and the three-question framework that keeps you moving.",
+  },
+  {
+    number: 7,
+    title: "Full Race Day Simulation",
+    duration: "15 min",
+    description: "Complete race rehearsal from 4 AM alarm to finish line. Integrates every skill from Sessions 1–6 into one powerful experience.",
+  },
+];
+---
+
+<section id="sessions" class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">7 Progressive Sessions</h2>
+      <p class="text-gray-500 text-lg max-w-2xl mx-auto">
+        Each session builds on the last. From basic relaxation to full race-day simulation — like a periodized training plan for your mind.
+      </p>
+    </div>
+
+    <div class="grid gap-4 max-w-4xl mx-auto">
+      {sessions.map((session) => (
+        <div class="bg-white rounded-2xl p-6 md:p-8 border border-gray-100 shadow-sm hover:shadow-md transition group">
+          <div class="flex items-start gap-5">
+            <div class="shrink-0 w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 font-bold text-lg flex items-center justify-center">
+              {session.number}
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-3 mb-1">
+                <h3 class="text-lg font-bold text-gray-900">{session.title}</h3>
+                {session.hasPreview && (
+                  <span class="text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Preview available</span>
+                )}
+              </div>
+              <p class="text-gray-500 text-sm mb-2">{session.duration}</p>
+              <p class="text-gray-600">{session.description}</p>
+            </div>
+            <div class="shrink-0 hidden md:flex items-center text-gray-300 group-hover:text-emerald-500 transition">
+              {!session.hasPreview ? (
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C9.243 2 7 4.243 7 7v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7c0-2.757-2.243-5-5-5zm3 10v8H9v-8h6zm-1-2h-4V7a2 2 0 114 0v3z"/>
+                </svg>
+              ) : (
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <polygon points="5,3 19,12 5,21" />
+                </svg>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <!-- Bonus -->
+      <div class="bg-gradient-to-r from-emerald-900 to-emerald-800 rounded-2xl p-6 md:p-8 text-white mt-2">
+        <div class="flex items-start gap-5">
+          <div class="shrink-0 w-12 h-12 rounded-xl bg-white/10 text-emerald-300 font-bold text-sm flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+            </svg>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-1">
+              <h3 class="text-lg font-bold">Bonus: Race Week Quick Protocol</h3>
+              <span class="text-xs font-medium text-emerald-300 bg-emerald-700/50 px-2 py-0.5 rounded-full">Included free</span>
+            </div>
+            <p class="text-emerald-200 text-sm mb-2">8 min</p>
+            <p class="text-emerald-100/80">Condensed session combining key anchors from all 7 sessions. Designed for the night before your race — one final confidence activation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-8">
+      <p class="text-gray-400 text-sm">Total programme: ~94 minutes of audio across 8 sessions</p>
+    </div>
+  </div>
+</section>

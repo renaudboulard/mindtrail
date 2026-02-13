@@ -1,0 +1,51 @@
+---
+const testimonials = [
+  {
+    quote: "I used MindTrail during my UTMB prep. When I hit the Col du Bonhomme at 2 AM, I felt like I'd already been there. The night running session was a game changer.",
+    name: "Marc D.",
+    detail: "Finisher UTMB 2024",
+    initials: "MD",
+  },
+  {
+    quote: "I almost DNF'd my first 100-miler at mile 65. This time, I had the three-question framework in my head. Mental problem, mental solution. I finished with a smile.",
+    name: "Sarah L.",
+    detail: "Western States qualifier",
+    initials: "SL",
+  },
+  {
+    quote: "I was skeptical about visualization. Ten minutes a day for six weeks completely changed how I handle technical descents. My Strava downhill times dropped without extra training.",
+    name: "Thomas R.",
+    detail: "Trail runner, 4 ultras completed",
+    initials: "TR",
+  },
+];
+---
+
+<section class="py-20 bg-emerald-950 text-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">What Trail Runners Say</h2>
+      <p class="text-emerald-300/70 text-lg">From first-time ultra finishers to experienced mountain runners.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {testimonials.map((t) => (
+        <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+          <svg class="w-8 h-8 text-emerald-500 mb-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+          </svg>
+          <p class="text-gray-200 leading-relaxed mb-6">{t.quote}</p>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 font-bold text-sm flex items-center justify-center">
+              {t.initials}
+            </div>
+            <div>
+              <p class="font-semibold text-white text-sm">{t.name}</p>
+              <p class="text-emerald-400/70 text-sm">{t.detail}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

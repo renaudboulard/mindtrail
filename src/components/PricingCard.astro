@@ -1,0 +1,81 @@
+---
+---
+
+<section id="pricing" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">One Price. Everything Included.</h2>
+      <p class="text-gray-500 text-lg">No subscription. No recurring fees. Train your mind once, benefit forever.</p>
+    </div>
+
+    <div class="max-w-lg mx-auto">
+      <div class="bg-white rounded-3xl shadow-xl border-2 border-emerald-500 p-8 md:p-10 relative overflow-hidden">
+        <!-- Badge -->
+        <div class="absolute top-0 right-0 bg-emerald-500 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl">
+          BEST VALUE
+        </div>
+
+        <h3 class="text-2xl font-bold text-gray-900 mb-2">Complete MindTrail Programme</h3>
+        <p class="text-gray-500 mb-6">Everything you need to train your mind for trail racing.</p>
+
+        <div class="flex items-baseline gap-2 mb-8">
+          <span class="text-5xl font-bold text-gray-900">$67</span>
+          <span class="text-gray-400">one-time payment</span>
+        </div>
+
+        <ul class="space-y-3 mb-8">
+          {[
+            "7 progressive visualization sessions (86 min)",
+            "Bonus: Race Week Quick Protocol (8 min)",
+            "Personalized training schedule based on your race date",
+            "Lifetime access — listen on any device",
+            "Download for offline listening",
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <span class="text-gray-700">{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <button
+          id="checkout-button"
+          class="w-full bg-emerald-500 hover:bg-emerald-600 text-white text-lg px-8 py-4 rounded-xl font-bold transition shadow-lg shadow-emerald-500/20"
+        >
+          Get Instant Access — $67
+        </button>
+
+        <div class="flex items-center justify-center gap-4 mt-4 text-sm text-gray-400">
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            Secure checkout
+          </span>
+          <span>Powered by Lemon Squeezy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById('checkout-button')?.addEventListener('click', () => {
+    const checkoutUrl = import.meta.env.PUBLIC_LEMONSQUEEZY_CHECKOUT_URL;
+
+    if (!checkoutUrl) {
+      // Dev mode: redirect to access page directly
+      window.location.href = '/access';
+      return;
+    }
+
+    // @ts-ignore - LemonSqueezy is loaded via script tag
+    if (typeof window.LemonSqueezy !== 'undefined') {
+      window.LemonSqueezy.Url.Open(checkoutUrl);
+    } else {
+      window.location.href = checkoutUrl;
+    }
+  });
+</script>

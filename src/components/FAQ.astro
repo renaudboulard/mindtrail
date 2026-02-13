@@ -1,0 +1,56 @@
+---
+const faqs = [
+  {
+    question: "Is this meditation?",
+    answer: "No. MindTrail uses sport-specific visualization based on the PETTLEP framework from sport psychology — not meditation. You're actively building neural pathways for trail running scenarios: technical descents, climbs, night sections, and race-day decisions. Think of it as mental rehearsal, not mindfulness."
+  },
+  {
+    question: "I've never done visualization before. Will this work for me?",
+    answer: "Session 1 is specifically designed for complete beginners. It teaches you how to visualize from scratch with progressive sensory layering. Most people are surprised by how vivid their imagery becomes after just two or three sessions."
+  },
+  {
+    question: "I'm training for a specific race. Will this help?",
+    answer: "Yes. The sessions cover universal trail running scenarios — descents, climbs, night running, aid stations, and low points — that apply to any trail or ultra-trail race. Session 7 is a full race-day simulation that you'll mentally map to your specific event."
+  },
+  {
+    question: "What format are the sessions? Can I listen offline?",
+    answer: "All sessions are high-quality MP3 audio files. You can stream them from any device with a browser, or download them for offline listening during travel, taper weeks, or pre-race nights when you might not have Wi-Fi."
+  },
+  {
+    question: "When should I listen? How often?",
+    answer: "After purchase, you'll get a personalized training schedule based on your race date. The recommended programme is 3 sessions per week for 6-8 weeks. Best times are before sleep, during rest days, or during your cool-down after a training run."
+  },
+  {
+    question: "What is the PETTLEP framework?",
+    answer: "PETTLEP stands for Physical, Environment, Task, Timing, Learning, Emotion, and Perspective. It's the gold standard in sport psychology for motor imagery. Unlike generic guided meditation, PETTLEP-based visualization activates the same brain regions as actually performing the movement — which is why it's so effective for sport performance."
+  },
+  {
+    question: "What's the science behind this?",
+    answer: "A 2021 University of Plymouth study found that non-runners trained with Functional Imagery Training were 5x more likely to complete an ultramarathon. Dozens of meta-analyses confirm that mental imagery improves motor performance, reduces anxiety, and increases resilience. MindTrail applies these principles specifically to trail running."
+  },
+];
+---
+
+<section id="faq" class="py-20 bg-gray-50">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="space-y-4">
+      {faqs.map((faq, i) => (
+        <details class="group bg-white rounded-2xl border border-gray-100 shadow-sm">
+          <summary class="flex items-center justify-between cursor-pointer p-6 font-semibold text-gray-900 list-none">
+            <span>{faq.question}</span>
+            <svg class="w-5 h-5 text-gray-400 shrink-0 ml-4 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-6 text-gray-600 leading-relaxed -mt-2">
+            {faq.answer}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:elevenlabs.io)",
+      "WebFetch(domain:innerhealthstudio.com)",
+      "WebFetch(domain:mindfulnessexercises.com)",
+      "WebFetch(domain:theplantedrunner.com)",
+      "WebFetch(domain:marathonhandbook.com)",
+      "WebFetch(domain:www.skadisportpsychology.com)",
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(for f in /Users/renaud/Documents/workspace/mindtrailweb/src/scripts/*.md)",
+      "Bash(done)",
+      "Bash(npm run dev:*)"
+    ]
+  }
+}
