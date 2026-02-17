@@ -4,7 +4,15 @@ export default function AudioDemoPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [audioSrc, setAudioSrc] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    fetch('/api/get-demo-url')
+      .then((r) => r.json())
+      .then((data) => { if (data.url) setAudioSrc(data.url); })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -62,7 +70,7 @@ export default function AudioDemoPlayer() {
 
   return (
     <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
-      <audio ref={audioRef} src="/audio/demo-preview.mp3" preload="metadata" />
+      <audio ref={audioRef} src={audioSrc ?? undefined} preload="metadata" />
 
       <div className="flex items-center gap-3 text-white text-sm mb-1">
         <span className="text-emerald-300 font-medium text-xs uppercase tracking-wider">Preview</span>
